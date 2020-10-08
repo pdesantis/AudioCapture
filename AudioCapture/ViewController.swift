@@ -12,7 +12,6 @@ class ViewController: NSViewController {
     
     private let captureSession = AVCaptureSession()
     private let sessionQueue = DispatchQueue(label: "session-queue")
-    private let writerQueue = DispatchQueue(label: "writer-queue")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,14 +41,7 @@ class ViewController: NSViewController {
         captureSession.addInput(input)
         
         let output = AVCaptureAudioDataOutput()
-        output.setSampleBufferDelegate(self, queue: writerQueue)
         captureSession.addOutput(output)
     }
 
-}
-
-extension ViewController: AVCaptureAudioDataOutputSampleBufferDelegate {
-    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        
-    }
 }
